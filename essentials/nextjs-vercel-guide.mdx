@@ -1,13 +1,8 @@
-# Mintlify Starter Kit
+---
+title: "How to Build and Deploy a Simple Next.js App with Vercel"
+---
 
-Use the starter kit to get your docs deployed and ready to customize.
-
-Click the green **Use this template** button at the top of this repo to copy the Mintlify starter kit. The starter kit contains examples with
-
-- Guide pages
-- Navigation
-- Customizations
-  How to Build and Deploy a Simple Next.js App with Vercel
+# How to Build and Deploy a Simple Next.js App with Vercel
 
 ## Table of Contents
 
@@ -23,7 +18,7 @@ Click the green **Use this template** button at the top of this repo to copy the
 
 # Introduction
 
-What this document covers:
+What this guide covers:
 
 - What Next.js is
 - What Vercel is
@@ -36,13 +31,13 @@ What you will learn:
 - How to connect the repository to Vercel and enable automatic deployments
 - How to manage environment variables locally and in Vercel
 
-What Next.js is
+## What Next.js is
 
-- Next.js is a React framework that supports server-side rendering, static generation, routing, and performance optimizations out of the box.
+Next.js is a React framework that supports server-side rendering, static generation, routing, and performance optimizations out of the box.
 
-What Vercel is
+## What Vercel is
 
-- Vercel is a cloud platform designed for front-end frameworks and static sites. It provides automated builds, preview deployments, and global CDN delivery.
+Vercel is a cloud platform designed for front-end frameworks and static sites. It provides automated builds, preview deployments, and global CDN delivery.
 
 # Prerequisites
 
@@ -79,7 +74,7 @@ npm run dev
 
 4. Open your browser at `http://localhost:3000` to view the running app.
 
-Brief project structure (summary):
+## Brief project structure (summary)
 
 - `pages/` — route files; each file maps to a route
 - `public/` — static assets
@@ -146,14 +141,14 @@ What environment variables are:
 
 - Environment variables store configuration and secrets (API keys, database URLs) outside source control.
 
-Local setup:
+## Local setup
 
 - Use `.env.local` for local development-only variables.
 - Client-exposed variables must be prefixed with `NEXT_PUBLIC_`.
 
-Example `.env.local`:
+### Example `.env.local`
 
-```
+```bash
 # Server-only (do not expose)
 DATABASE_URL="postgres://user:password@host:5432/dbname"
 
@@ -161,13 +156,13 @@ DATABASE_URL="postgres://user:password@host:5432/dbname"
 NEXT_PUBLIC_API_BASE_URL="https://api.example.com"
 ```
 
-Adding variables in Vercel dashboard:
+## Adding variables in Vercel dashboard
 
 1. Open your project in Vercel → **Settings** → **Environment Variables**.
 2. Click **Add** and enter the **Name**, **Value**, and **Environment** (Preview / Production / Development).
 3. Save and then redeploy the project.
 
-Redeploying after changes:
+## Redeploying after changes
 
 - After adding or updating variables in Vercel, trigger a redeploy to apply changes.
 - For local edits to `.env.local`, restart the dev server (`npm run dev`).
@@ -176,21 +171,21 @@ Redeploying after changes:
 
 # Deployment Process Explained
 
-Automatic deployments:
+## Automatic deployments
 
 - Vercel builds and deploys on each push to connected branches.
 - Each PR/branch receives a Preview Deployment with an immutable URL.
 - Production deployment occurs when you merge/push to the production branch (commonly `main`).
 
-Production builds:
+## Production builds
 
 - Vercel runs the configured build command (e.g., `npm run build`) and serves optimized assets via a global CDN.
 
-Preview deployments:
+## Preview deployments
 
 - Useful for QA and stakeholder review; each has an isolated URL.
 
-Getting the live URL:
+## Getting the live URL
 
 - After deployment completes, Vercel displays the deployment URL and the production URL (if applicable).
 
@@ -200,7 +195,7 @@ Getting the live URL:
 
 # Common Issues & Troubleshooting
 
-Issue 1 — Build failure
+## Issue 1 — Build failure
 
 - Symptom: Build fails during `npm run build` on Vercel.
 - Possible causes:
@@ -208,12 +203,12 @@ Issue 1 — Build failure
   - Syntax error or incompatible Node.js version
   - Missing environment variable required at build time
 - Resolution steps:
-  1.  Inspect Vercel build logs for the error message.
-  2.  Add missing dependencies and commit.
-  3.  Set the Node version in `package.json` (`engines.node`) or Vercel settings.
-  4.  Add any required build-time env vars in Vercel and redeploy.
+  1. Inspect Vercel build logs for the error message.
+  2. Add missing dependencies and commit.
+  3. Set the Node version in `package.json` (`engines.node`) or Vercel settings.
+  4. Add any required build-time env vars in Vercel and redeploy.
 
-Issue 2 — Environment variable not available in browser
+## Issue 2 — Environment variable not available in browser
 
 - Symptom: Client code cannot access a variable.
 - Cause: Variable is not prefixed with `NEXT_PUBLIC_`.
@@ -221,15 +216,15 @@ Issue 2 — Environment variable not available in browser
   - Prefix the variable with `NEXT_PUBLIC_` if it is safe for client exposure.
   - Restart the dev server and redeploy.
 
-Issue 3 — GitHub repository not connected in Vercel
+## Issue 3 — GitHub repository not connected in Vercel
 
 - Symptom: Vercel cannot find or access your repository.
 - Possible causes:
   - GitHub integration lacks permissions for the repository
   - The Vercel GitHub app needs reauthorization
 - Resolution:
-  1.  Re-authorize GitHub in Vercel: Profile → Account Settings → Git Integrations.
-  2.  Grant the Vercel GitHub app access to the repository.
+  1. Re-authorize GitHub in Vercel: Profile → Account Settings → Git Integrations.
+  2. Grant the Vercel GitHub app access to the repository.
 
 > **Tip:** For intermittent issues, check GitHub and Vercel status pages.
 
@@ -241,7 +236,7 @@ This guide provided a concise, step-by-step workflow to create a Next.js app, pu
 
 ---
 
-Notes and quick references
+## Notes and quick references
 
 - **Note:** Local variables — use `.env.local`.
 - **Tip:** Prefix client variables with `NEXT_PUBLIC_`.
