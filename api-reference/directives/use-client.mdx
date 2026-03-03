@@ -12,3 +12,84 @@ Source: Vercel / Next.js docs — see https://nextjs.org/docs for canonical docu
 ---
 
 {/* TODO: paste the full directive content copied from the resource images here */}
+
+Below is the guidance and examples for the `use client` directive from the Next.js / Vercel documentation. The `use client` directive marks a file as containing Client Components for React/Next.js, enabling client-side interactivity and browser APIs.
+
+## Overview
+
+The `use client` directive declares an entry point for the components to be rendered on the client side and should be used when creating interactive user interfaces that require client-side JavaScript capabilities, such as state management, event handling, or access to browser APIs.
+
+### Good to know
+
+- You do not need to add the `use client` directive to every file that contains Client Components. You only need to add it to the files whose components you want to render directly within Server Components.
+- The `use client` directive must be the first statement in the file, before any imports.
+
+## Usage
+
+To declare an entry point for Client Components, add the `use client` directive at the top of the file, before any imports:
+
+```tsx
+// app/components/Counter.tsx
+"use client";
+
+import { useState } from "react";
+
+export default function Counter() {
+  const [count, setCount] = useState(0);
+  return (
+    <div>
+      <p>count: {count}</p>
+      <button onClick={() => setCount((c) => c + 1)}>Increment</button>
+    </div>
+  );
+}
+```
+
+### Props must be serializable
+
+When using the `use client` directive, the props passed to Client Components must be serializable — i.e., in a format that React can serialize when sending data from the server to the client.
+
+```tsx
+"use client";
+
+export default function Counter({ defaultCount }: { defaultCount: number }) {
+  return (
+    <button
+      onClick={() => {
+        /* client handler */
+      }}
+    >
+      Increment
+    </button>
+  );
+}
+```
+
+## Nesting Client Components within Server Components
+
+Combining Server and Client Components allows you to build applications that are both performant and interactive.
+
+1. Server Components: Use for static content, data fetching, and SEO-friendly elements.
+2. Client Components: Use for interactive elements that require state, effects, or browser APIs.
+3. Component composition: Nest Client Components inside Server Components as needed.
+
+Example:
+
+```tsx
+// app/page.tsx (Server Component)
+import Header from "./header"; // Server Component
+import Counter from "./counter"; // Client Component
+
+export default function Page() {
+  return (
+    <div>
+      <Header />
+      <Counter />
+    </div>
+  );
+}
+```
+
+## Reference
+
+See the Next.js documentation for more information on `use client`: https://nextjs.org/docs

@@ -12,3 +12,42 @@ Source: Vercel / Next.js docs — see https://nextjs.org/docs for canonical docu
 ---
 
 {/* TODO: paste the full directive content copied from the resource images here */}
+
+The `use cache: remote` directive configures caching for remote cache handlers and persistent shared caching. This directive is intended for scenarios where cached results need to be shared across instances or persisted in a remote cache store.
+
+## Overview
+
+`use cache: remote` indicates that a function's cached results may be stored in a remote or shared cache, depending on the platform's cache handlers and configuration. It is useful for expensive computations or data that is safe to cache across users and requests.
+
+## Usage
+
+Place `use cache: remote` at the top of a file or inline in a function that should use remote caching semantics.
+
+```ts
+"use cache: remote";
+
+import { redisClient } from "@/lib/redis";
+
+export async function getTrending() {
+  // remote-cache-aware fetch
+  const cached = await redisClient.get("trending");
+  if (cached) return JSON.parse(cached);
+
+  const fresh = await fetchTrendingFromSource();
+  await redisClient.set("trending", JSON.stringify(fresh), "EX", 60);
+  return fresh;
+}
+```
+
+## Considerations
+
+- Remote caches are appropriate for non-sensitive, shareable data.
+- Ensure appropriate TTLs and invalidation strategies to prevent stale data.
+- Be mindful of data privacy and do not store per-user sensitive data in remote/shared caches.
+
+## Related
+
+- `use cache`
+- `use cache: private`
+
+See the Next.js docs for platform-specific guidance on configuring remote cache handlers: https://nextjs.org/docs

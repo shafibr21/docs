@@ -12,3 +12,82 @@ Source: Vercel / Next.js docs — see https://nextjs.org/docs for canonical docu
 ---
 
 {/* TODO: paste the full directive content copied from the resource images here */}
+
+The `use cache: private` directive allows functions to access runtime request APIs like `cookies()`, `headers()`, and `searchParams` within a cached scope. This directive is useful when you want to cache results while still being able to read request-scoped data.
+
+## Overview
+
+`use cache: private` marks a file or function so that it can access request-scoped runtime APIs while being executed in a cached scope. Results are never stored on the server — they’re cached only in the browser's memory or in a private per-request scope depending on the runtime behavior. This ensures sensitive information isn't inadvertently persisted across users.
+
+Use `use cache: private` when:
+
+- You want to cache a function that also accesses runtime data, and refactoring to move the runtime access outside the cached function is impractical.
+- Compliance requirements prevent storing certain data on the server.
+
+Because this directive accesses runtime data, the function executes on every server render and is excluded from running during static shell generation.
+
+It is not possible to configure custom cache handlers for `use cache: private`.
+
+## Usage
+
+To use `use cache: private`, enable the `cacheComponents` flag in your `next.config.js` and then add `use cache: private` to your function along with a `cacheLife` configuration if required.
+
+```ts
+// next.config.js
+import { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  experimental: { cacheComponents: true },
+};
+
+export default nextConfig;
+```
+
+```ts
+// app/(shop)/product/[id]/page.tsx
+"use cache: private";
+
+import { cookies } from "next/headers";
+import { cacheLife } from "next/cache";
+
+export async function getProduct(id: string) {
+  // Use cookies or headers within the private cached scope
+  const sessionId = cookies().get("session")?.value ?? "guest";
+  // fetch or compute recommendations using session-specific data
+  return { id, recommendations: [] };
+}
+```
+
+### Request APIs allowed in private caches
+
+The following request-specific APIs can be used inside `use cache: private` functions:
+
+- `cookies()` : Yes
+- `headers()` : Yes
+- `searchParams` : Yes
+
+> Note: The `next/headers` or similar connection-specific APIs are restricted so private caches do not leak connection information that cannot be safely cached.
+
+## Basic example
+
+```tsx
+"use cache: private";
+import { cookies } from "next/headers";
+
+export async function getRecommendations(productId: string) {
+  const session = cookies().get("session")?.value;
+  // perform fetch using session-specific identifier
+  return await fetchRecommendationsFor(session, productId);
+}
+```
+
+## Version history
+
+- v1.0.0 - `use cache: private` introduced with Cache Components experimental feature.
+
+## Related
+
+- `use cache`
+- `use cache: remote`
+
+See the Next.js docs for more details: https://nextjs.org/docs

@@ -12,3 +12,42 @@ Source: Vercel / Next.js docs — see https://nextjs.org/docs for the canonical 
 ---
 
 {/* TODO: paste the full directive content copied from the resource images here */}
+
+This page documents the `use cache` directive and related caching behavior available when using the Next.js App Router and React Server Components.
+
+## Overview
+
+The `use cache` directive enables caching behavior inside the App Router. When used appropriately, cached values and memoized functions can improve performance by avoiding repeated work on the server.
+
+`use cache` can be used to mark functions or modules where cached values should be preserved for the lifetime of the server runtime or for the scope in which the cache is applied.
+
+## Usage
+
+Add the `use cache` directive at the top of a file to enable caching semantics for functions exported from that file.
+
+```ts
+// app/lib/data.ts
+"use cache";
+
+import { db } from "@/lib/db";
+
+export async function getPopularPosts() {
+  const posts = await db.post.findMany({ where: { popular: true } });
+  return posts;
+}
+```
+
+You may also use runtime helpers such as React's `cache` (when available) to memoize functions that should be stable across requests.
+
+## Revalidation and cache controls
+
+Caching behavior in Next.js can be controlled at the fetch/cache/function level by using APIs like `fetch` with `next: { revalidate }`, or by using built-in cache-control utilities. `use cache` itself indicates that values should be cached rather than re-run for every request, but revalidation strategies should be applied where fresh data is required.
+
+## Related directives
+
+- `use cache: private`: Use when cached functions need access to request-scoped APIs (cookies, headers, etc). See the next page for details.
+- `use cache: remote`: Use when configuring remote/persistent caching handlers.
+
+## Reference
+
+See the App Router and caching documentation on the Next.js website for details and platform-specific guidance: https://nextjs.org/docs

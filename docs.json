@@ -49,7 +49,7 @@
         "groups": [
           {
             "group": "API documentation",
-            "pages": ["api-reference/introduction"]
+            "pages": ["api-reference/introduction", "api-reference/directives/index"]
           },
           {
             "group": "Endpoint examples",
@@ -58,17 +58,6 @@
               "api-reference/endpoint/create",
               "api-reference/endpoint/delete",
               "api-reference/endpoint/webhook"
-            ]
-          },
-          {
-            "group": "Directives",
-            "pages": [
-              "api-reference/directives/index",
-              "api-reference/directives/use-cache",
-              "api-reference/directives/use-cache-private",
-              "api-reference/directives/use-cache-remote",
-              "api-reference/directives/use-client",
-              "api-reference/directives/use-server"
             ]
           }
         ]

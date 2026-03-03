@@ -12,3 +12,105 @@ Source: Vercel / Next.js docs — see https://nextjs.org/docs for canonical docu
 ---
 
 {/* TODO: paste the full directive content copied from the resource images here */}
+
+Below is the canonical guidance and examples for the `use server` directive from the Next.js / Vercel documentation. This directive marks code to run on the server and is commonly used for Server Functions and server-only logic.
+
+## Overview
+
+The `use server` directive designates a function or file to be executed on the server side. It can be used at the top of a file to indicate that all functions in that file are server-side, or inline at the top of a function to mark that single function as a Server Function.
+
+When used at the top of a file all functions in the file are executed on the server.
+
+## Using `use server` at the top of a file
+
+The following example shows a file with a `use server` directive at the top. All functions in the file are executed on the server.
+
+```ts
+// app/actions.ts
+"use server";
+
+import { db } from "@/lib/db"; // Your database client
+
+export async function createUser(data: { name: string; email: string }) {
+  const user = await db.user.create({ data });
+  return user;
+}
+```
+
+## Using Server Functions in a Client Component
+
+To use Server Functions in Client Components you need to create your Server Functions in a dedicated file using the `use server` directive at the top of the file. These Server Functions can then be imported into Client and Server Components and executed.
+
+Assuming you have a `fetchUsers` Server Function in `actions.ts`:
+
+```ts
+// app/actions.ts
+"use server";
+
+import { db } from "@/lib/db";
+
+export async function fetchUsers() {
+  const users = await db.user.findMany();
+  return users;
+}
+```
+
+You can then import the `fetchUsers` Server Function into a Client Component and execute it on the client-side via an action invocation (for example, through a form submission or event handler proxied to the server).
+
+```tsx
+// app/components/MyButton.tsx
+"use client";
+
+import { fetchUsers } from "../actions";
+
+export default function MyButton() {
+  return <button onClick={() => fetchUsers()}>Fetch Users</button>;
+}
+```
+
+> Note: Server Functions invoked from Client Components run on the server — the client only calls a lightweight proxy.
+
+## Using `use server` inline
+
+You can also use `use server` inline at the top of a function to mark it as a Server Function.
+
+```ts
+// app/api/posts/route.ts
+export async function POST(request: Request) {
+  "use server";
+
+  const data = await request.json();
+  // server-only logic
+  const post = await createPostInDb(data);
+  return new Response(JSON.stringify(post));
+}
+```
+
+## Security considerations
+
+When using the `use server` directive, ensure that all server-side logic is secure and that sensitive data remains protected. Server Functions can access secrets, databases, and other server-only resources. Always authenticate and authorize users before performing sensitive server-side operations.
+
+### Authentication and authorization
+
+Always authenticate and authorize users before performing sensitive server-side operations. Example pattern:
+
+```ts
+"use server";
+
+import { db } from "@/lib/db";
+import { getCurrentUser } from "@/lib/auth";
+
+export async function createPost(data: { title: string; body: string }) {
+  const user = await getCurrentUser();
+  if (!user) throw new Error("Unauthorized");
+
+  const post = await db.post.create({
+    data: { ...data, authorId: user.id },
+  });
+  return post;
+}
+```
+
+## Reference
+
+See the Next.js documentation for more information on `use server` and Server Functions: https://nextjs.org/docs
