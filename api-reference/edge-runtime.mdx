@@ -1,0 +1,54 @@
+---
+title: Edge Runtime
+sidebar_label: "Edge Runtime"
+---
+
+# Edge Runtime
+
+Last updated February 27, 2026
+
+The Edge Runtime provides a limited, high-performance runtime suitable for executing code at the network edge. It supports many Web standard APIs but does not include the full Node.js API surface.
+
+Caveats
+
+- The Edge Runtime does not support all Node.js APIs. Native Node modules and some synchronous Node APIs are not available.
+- Some packages may not work as expected when executed in the Edge Runtime.
+
+Reference (selected APIs)
+
+Network APIs
+
+- `fetch`, `Request`, `Response`, `Headers`
+
+Encoding APIs
+
+- `TextEncoder`, `TextDecoder`, `atob`, `btoa`
+
+Stream APIs
+
+- `ReadableStream`, `WritableStream`, `TransformStream`
+
+Crypto APIs
+
+- Subset of Web Crypto (`crypto.subtle`, `crypto.getRandomValues`)
+
+Web Standard APIs
+
+- `URL`, `URLSearchParams`, `FormData`, `Blob`, `File`, `WebSocket` (limited), `AbortController`
+
+Next.js Specific Polyfills
+
+- A small set of polyfills and helpers that make common browser/server APIs available in Next.js functions when needed.
+
+Environment variables
+
+- Use the platform's environment variable access (exposed by Next.js) — consult deployment docs for specifics.
+
+Unsupported APIs
+
+- Full Node.js `fs`, many native modules, and some synchronous system APIs are not supported in the Edge Runtime.
+
+Notes
+
+- The Edge Runtime is ideal for low-latency server logic, middleware, and light-weight API handlers.
+- Test packages in the Edge environment early — some packages that assume full Node will fail.

@@ -1,0 +1,54 @@
+---
+title: Turbopack
+sidebar_label: "Turbopack"
+---
+
+# Turbopack
+
+Turbopack is a next-generation bundler and dev server designed for performance and fast incremental builds.
+
+Why Turbopack?
+
+- Designed for fast incremental builds during development.
+- Focuses on providing a modern developer experience with minimal config.
+
+Getting started
+
+Install and enable Turbopack in your Next.js project (example configuration):
+
+```json
+{
+  "dev": {
+    "tool": "turbopack",
+    "options": {}
+  }
+}
+```
+
+Using Webpack instead
+
+If you prefer Webpack you can continue to use it — Turbopack is opt-in and can be disabled per-project.
+
+Supported features
+
+- Fast incremental rebuilds
+- Source maps
+- CSS and asset handling (see project docs for details)
+
+Unsupported or experimental features
+
+- Some legacy loaders and uncommon webpack plugins may not be supported yet.
+
+Configuration
+
+Turbopack exposes configuration knobs for enabling/disabling features and integrating with frameworks. Refer to the upstream Turbopack docs for full configuration options.
+
+Generating trace files for performance debugging
+
+Turbopack can generate trace files to help diagnose build performance. Enable tracing in dev configuration when needed.
+
+Version changes
+
+- Keep an eye on the upstream Turbopack changelog; breaking changes may appear between major versions.
+
+For full details and advanced options, see the official Turbopack documentation and examples.

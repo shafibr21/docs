@@ -1,0 +1,46 @@
+---
+title: create-next-app
+sidebar_label: "create-next-app"
+---
+
+# create-next-app
+
+Last updated February 27, 2026
+
+The `create-next-app` CLI allows you to create a new Next.js application using the default template or an example from a public GitHub repository.
+
+Basic usage
+
+```bash
+pnpm create next-app [project-name]
+# or
+npx create-next-app [project-name]
+```
+
+Common options
+
+- `--ts` — Initialize as a TypeScript project.
+- `--js` — Initialize as a JavaScript project.
+- `--tailwind` — Initialize with Tailwind CSS config.
+- `--eslint` — Initialize with ESLint config.
+- `--src-dir` — Initialize inside a `src/` directory.
+- `--example <repo>` — Use an example repository as the template.
+
+Examples
+
+With the default template:
+
+```bash
+pnpm create next-app my-app
+```
+
+With an official example:
+
+```bash
+pnpm create next-app --example "https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss" my-app
+```
+
+Notes
+
+- The generator will prompt for optional configuration choices (TypeScript, ESLint, CSS tooling, app router, etc.).
+- Use the `--example` flag to scaffold from public example repos.
