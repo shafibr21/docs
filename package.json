@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "dev": "mint dev",
+    "validate": "mint validate",
+    "start": "mint dev"
+  },
+  "dependencies": {
+    "mint": "^4.2.397"
+  }
+}
