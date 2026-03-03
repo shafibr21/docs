@@ -1,0 +1,23 @@
+---
+title: Script Component
+---
+
+# Script Component
+
+The `next/script` component helps optimize third-party and inline scripts with loading strategies (`beforeInteractive`, `afterInteractive`, `lazyOnload`).
+
+Basic usage
+
+```jsx
+import Script from "next/script";
+
+export default function Page() {
+  return (
+    <>
+      <Script src="https://example.com/widget.js" strategy="lazyOnload" />
+    </>
+  );
+}
+```
+
+Choose an appropriate `strategy` to control when the script executes relative to page hydration.

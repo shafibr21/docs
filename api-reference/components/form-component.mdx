@@ -1,0 +1,27 @@
+---
+title: Form Component
+---
+
+# Form Component
+
+The `<Form>` component provides helpers for handling form submissions and client-side navigation updates.
+
+Basic usage
+
+```jsx
+"use client";
+import { Form } from "next/form";
+
+export default function Search() {
+  return (
+    <Form action="/search">
+      <input name="q" placeholder="Search" />
+      <button type="submit">Go</button>
+    </Form>
+  );
+}
+```
+
+You can pass an `action` string or a server action function. The component helps encode fields into the request and integrates with client-side navigation.
+
+See server action examples and mutation patterns in the runtime docs.

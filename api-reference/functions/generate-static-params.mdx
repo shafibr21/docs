@@ -1,0 +1,13 @@
+---
+title: generateStaticParams
+---
+
+# generateStaticParams
+
+Used to generate route parameters for dynamic routes at build time. Return an array of parameter objects.
+
+```js
+export async function generateStaticParams() {
+  return [{ slug: "a" }, { slug: "b" }];
+}
+```

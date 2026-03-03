@@ -1,0 +1,13 @@
+---
+title: revalidatePath
+---
+
+# revalidatePath
+
+`revalidatePath` invalidates the cached rendering for a specific path so subsequent requests will re-generate the page.
+
+```js
+import { revalidatePath } from "next/cache";
+
+await revalidatePath("/posts/1");
+```

@@ -1,0 +1,17 @@
+---
+title: cookies
+---
+
+# cookies
+
+Helpers for reading and setting cookies on the server and in server components.
+
+Basic example:
+
+```js
+// reading cookies
+import { cookies } from "next/headers";
+
+const cookieStore = cookies();
+const token = cookieStore.get("token");
+```

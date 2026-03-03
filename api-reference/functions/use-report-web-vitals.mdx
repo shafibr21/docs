@@ -1,0 +1,13 @@
+---
+title: useReportWebVitals
+---
+
+# useReportWebVitals
+
+Hook used to report web vitals metrics from client components back to an analytics endpoint.
+
+```js
+import { useReportWebVitals } from "next/navigation";
+
+useReportWebVitals((metric) => sendMetric(metric));
+```

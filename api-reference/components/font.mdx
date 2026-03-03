@@ -1,0 +1,21 @@
+---
+title: Font
+---
+
+# Font
+
+Use the built-in `next/font` loaders to optimize and load web fonts.
+
+Basic usage
+
+```jsx
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"] });
+
+export default function Page() {
+  return <p className={inter.className}>Hello, world</p>;
+}
+```
+
+See the `next/font` docs for options and best practices (variable fonts, subsets, display, fallback).

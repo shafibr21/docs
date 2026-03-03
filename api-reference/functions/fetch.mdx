@@ -1,0 +1,13 @@
+---
+title: fetch
+---
+
+# fetch
+
+Extended `fetch` API for server runtime with automatic caching and improved streaming support. Use like the standard `fetch` but consult runtime docs for cache options and revalidation.
+
+```js
+const res = await fetch("https://api.example.com/data", {
+  cache: "force-cache",
+});
+```

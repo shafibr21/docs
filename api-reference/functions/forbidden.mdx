@@ -1,0 +1,13 @@
+---
+title: forbidden
+---
+
+# forbidden
+
+Helper to short-circuit a request with a 403 Forbidden response. Useful in server actions or middleware when access is denied.
+
+```js
+import { forbidden } from "next/response";
+
+if (!allowed) return forbidden();
+```

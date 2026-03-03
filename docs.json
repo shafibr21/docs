@@ -49,7 +49,12 @@
         "groups": [
           {
             "group": "API documentation",
-            "pages": ["api-reference/introduction", "api-reference/directives/index"]
+            "pages": [
+              "api-reference/introduction",
+              "api-reference/directives/index",
+              "api-reference/components/index",
+              "api-reference/functions/index"
+            ]
           },
           {
             "group": "Endpoint examples",

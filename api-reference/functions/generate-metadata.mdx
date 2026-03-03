@@ -1,0 +1,15 @@
+---
+title: generateMetadata
+---
+
+# generateMetadata
+
+`generateMetadata` is used to programmatically create page metadata (title, description, open graph, etc.) at request time.
+
+Example:
+
+```js
+export async function generateMetadata({ params }) {
+  return { title: `Post ${params.slug}` };
+}
+```

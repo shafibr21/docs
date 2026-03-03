@@ -1,0 +1,21 @@
+---
+title: Image Component
+---
+
+# Image Component
+
+Use the `next/image` component to optimize images (automatic resizing, format negotiation, lazy loading).
+
+Basic usage
+
+```jsx
+import Image from "next/image";
+
+export default function Avatar() {
+  return <Image src="/me.png" alt="Me" width={64} height={64} />;
+}
+```
+
+Key props: `src`, `alt`, `width`, `height`, `priority`, `placeholder`, and layout-related options.
+
+Review configuration options for domains and loader behavior in `next.config.js`.

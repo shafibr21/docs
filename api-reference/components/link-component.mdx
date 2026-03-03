@@ -1,0 +1,23 @@
+---
+title: Link Component
+---
+
+# Link Component
+
+Use the `next/link` component for client-side navigation with prefetching and fast transitions.
+
+Basic usage
+
+```jsx
+import Link from "next/link";
+
+export default function Nav() {
+  return (
+    <nav>
+      <Link href="/about">About</Link>
+    </nav>
+  );
+}
+```
+
+`next/link` accepts `href`, `replace`, `prefetch`, and other navigation-related props. Wrap inline elements or use it with child anchors for custom styling.

@@ -1,0 +1,13 @@
+---
+title: unauthorized
+---
+
+# unauthorized
+
+Helper to respond with a 401 Unauthorized result when authentication is required.
+
+```js
+import { unauthorized } from "next/response";
+
+if (!user) return unauthorized();
+```

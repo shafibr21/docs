@@ -1,0 +1,13 @@
+---
+title: revalidateTag
+---
+
+# revalidateTag
+
+`revalidateTag` triggers revalidation for cached items that were stored with a tag. Use to selectively refresh groups of cached entries.
+
+```js
+import { revalidateTag } from "next/cache";
+
+await revalidateTag("posts");
+```

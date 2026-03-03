@@ -1,0 +1,14 @@
+---
+title: headers
+---
+
+# headers
+
+`headers` gives access to request headers in server components and runtime.
+
+```js
+import { headers } from "next/headers";
+
+const h = headers();
+const ua = h.get("user-agent");
+```
